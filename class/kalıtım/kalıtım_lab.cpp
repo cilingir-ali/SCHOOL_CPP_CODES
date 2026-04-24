@@ -67,35 +67,52 @@ int main() {
 
     return 0;
 }
+
+
+
+
+
+
 2. Soru: Apartman, Okul ve Hastane Sınıfları
 #include <iostream>
-#include <string>
-
 using namespace std;
 
 class Bina {
-public:
+private:
     int katSayisi;
+    int metrekare;
+    bool bahceVarMi;
     bool otoparkVarMi;
 
-    Bina(int k, bool o) {
-        katSayisi = k;
-        otoparkVarMi = o;
-    }
+public:
+    void setKatSayisi(int k) { katSayisi = k; }
+    int getKatSayisi() { return katSayisi; }
+
+    void setMetrekare(int m) { metrekare = m; }
+    int getMetrekare() { return metrekare; }
+
+    void setBahceVarMi(bool b) { bahceVarMi = b; }
+    bool getBahceVarMi() { return bahceVarMi; }
+
+    void setOtoparkVarMi(bool o) { otoparkVarMi = o; }
+    bool getOtoparkVarMi() { return otoparkVarMi; }
 
     void bilgiYazdir() {
-        cout << "Kat Sayisi: " << katSayisi << ", Otopark Var Mi: " 
-             << (otoparkVarMi ? "Evet" : "Hayir") << endl;
+        cout << "Kat: " << katSayisi
+             << ", Metrekare: " << metrekare
+             << ", Bahce: " << (bahceVarMi ? "Var" : "Yok")
+             << ", Otopark: " << (otoparkVarMi ? "Var" : "Yok")
+             << endl;
     }
 };
 
 class Apartman : public Bina {
-public:
+private:
     int daireSayisi;
 
-    Apartman(int k, bool o, int d) : Bina(k, o) {
-        daireSayisi = d;
-    }
+public:
+    void setDaireSayisi(int d) { daireSayisi = d; }
+    int getDaireSayisi() { return daireSayisi; }
 
     void bilgiYazdir() {
         Bina::bilgiYazdir();
@@ -104,12 +121,12 @@ public:
 };
 
 class Okul : public Bina {
-public:
+private:
     int sinifSayisi;
 
-    Okul(int k, bool o, int s) : Bina(k, o) {
-        sinifSayisi = s;
-    }
+public:
+    void setSinifSayisi(int s) { sinifSayisi = s; }
+    int getSinifSayisi() { return sinifSayisi; }
 
     void bilgiYazdir() {
         Bina::bilgiYazdir();
@@ -118,12 +135,12 @@ public:
 };
 
 class Hastane : public Bina {
-public:
+private:
     int yatakSayisi;
 
-    Hastane(int k, bool o, int y) : Bina(k, o) {
-        yatakSayisi = y;
-    }
+public:
+    void setYatakSayisi(int y) { yatakSayisi = y; }
+    int getYatakSayisi() { return yatakSayisi; }
 
     void bilgiYazdir() {
         Bina::bilgiYazdir();
@@ -132,16 +149,36 @@ public:
 };
 
 int main() {
-    Apartman a(10, true, 50);
-    Okul o(5, false, 15);
-    Hastane h(8, true, 100);
+    Apartman a;
+    Okul o;
+    Hastane h;
 
+    a.setKatSayisi(10);
+    a.setMetrekare(500);
+    a.setBahceVarMi(true);
+    a.setOtoparkVarMi(true);
+    a.setDaireSayisi(20);
+
+    o.setKatSayisi(5);
+    o.setMetrekare(800);
+    o.setBahceVarMi(true);
+    o.setOtoparkVarMi(false);
+    o.setSinifSayisi(30);
+
+    h.setKatSayisi(8);
+    h.setMetrekare(1200);
+    h.setBahceVarMi(false);
+    h.setOtoparkVarMi(true);
+    h.setYatakSayisi(100);
+
+    cout << "Apartman:" << endl;
     a.bilgiYazdir();
-    o.bilgiYazdir();
-    h.bilgiYazdir();
 
-    return 0;
-}
+    cout << "\nOkul:" << endl;
+    o.bilgiYazdir();
+
+    cout << "\nHastane:" << endl;
+    h.bilgiYazdir();
 
     return 0;
 }
